@@ -1,15 +1,14 @@
 import axios from "axios";
 
-const API_BACKEND_URL = "http://localhost:8280/api/auth/";
+const API_BACKEND_URL = "http://localhost:8080/api/auth/";
 
 class UserService {
 
   // TODO: Function for get user credentials and display result of login
-  login(username, password, authType) {
-    return axios.post(API_BACKEND_URL + "signin", {
+  login(username, password) {
+    return axios.post(API_BACKEND_URL + "sign-in", {
         username,
-        password,
-        authType
+        password
       })
       .then(response => {
         if (response.data.accessToken) {
@@ -21,14 +20,12 @@ class UserService {
   }
 
   // TODO: Function for registering user
-  register(username, contactNo, email, password, userType, authType) {
-    return axios.post(API_BACKEND_URL + "signup", {
+  register(username, contactNo, email, password) {
+    return axios.post(API_BACKEND_URL + "sign-up", {
       username,
       contactNo,
       email,
-      password,
-      userType,
-      authType
+      password
     });
   }
 

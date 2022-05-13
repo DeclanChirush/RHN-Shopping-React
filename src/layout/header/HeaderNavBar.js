@@ -33,8 +33,8 @@ class HeaderNavBar extends Component{
                             className="feather-phone-call"/>
                             {CONTACT_NUMBER}</a>
 
-                        <Link className="login px-2 negation" to="/signin">Login</Link>
-                        <Link className="login px-2 negation" to="/signup">Sign up</Link>
+                        <Link className="login px-2 negation" to="/sign-in">Login</Link>
+                        <Link className="login px-2 negation" to="/sign-up">Sign up</Link>
                         <p className='text-center'>
                             <DarkModeToggleDiv/>
                         </p>

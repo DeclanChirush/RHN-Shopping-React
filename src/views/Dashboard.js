@@ -6,6 +6,7 @@ import {useHistory} from "react-router-dom";
 import axios from "axios";
 import {addAllProductsFromDb} from "../store/actions/ProductActions";
 import {configureStore} from "../store";
+import Connection from "../services/connection.json"
 
 /**
 /**
@@ -22,7 +23,7 @@ function DashBoard() {
 
     useEffect(() => {
         setProducts(configureStore().getState().onlineStoreReducer.products);
-        axios.get(process.env.REACT_APP_BACKEND_STARTING_URL + 'seller/get-all-product')
+        axios.get(Connection.productAddress + 'seller/get-all-product')
             .then(function (response) {
                 dispatch(addAllProductsFromDb(response.data));
             })

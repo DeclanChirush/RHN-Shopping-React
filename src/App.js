@@ -19,10 +19,10 @@ class App extends Component{
                 <BrowserRouter>
                     <Header/>
                     <Switch>
-                        <Route path="/signin" component={Login}/>
-                        <Route path="/signup" component={Register}/>
+                        <Route path="/sign-in" component={Login}/>
+                        <Route path="/sign-up" component={Register}/>
 
-                        <Route path='/checkout'>
+                        <Route path='/checkout'>y
                             <Checkout/>
                         </Route>
                         <Route path="/dashboard">
