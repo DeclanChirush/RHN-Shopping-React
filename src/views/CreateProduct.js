@@ -4,6 +4,8 @@ import {useHistory} from "react-router-dom";
 import axios from "axios";
 import {v4 as uuidv4} from 'uuid';
 import ImgUpload from "../components/dashboard/ImageUpload";
+import Connection from "../services/connection.json";
+
 
 /**
  * Render Create product page.
@@ -38,7 +40,7 @@ function CreateProduct() {
              * Create new product in database.
              */
             setIsCreatingProduct(true);
-            axios.post(process.env.REACT_APP_BACKEND_STARTING_URL + 'seller/add-product',
+            axios.post(Connection.productAddress + 'seller/add-product',
                 {
                     id: "product" + uuidv4(),
                     title: title,

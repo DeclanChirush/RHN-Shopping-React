@@ -3,6 +3,8 @@ import {Button, Image, Spinner} from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import Swal from 'sweetalert2';
 import axios from "axios";
+import Connection from "../../services/connection.json";
+
 
 
 /**
@@ -48,7 +50,7 @@ function DashboardItem(props) {
                  */
                 setIsDisableButtons(true);
                 setIsUpdating(true);
-                axios.put(process.env.REACT_APP_BACKEND_STARTING_URL + 'seller/update-product',
+                axios.put(Connection.productAddress + 'seller/update-product',
                     {
                         id: product.id,
                         title: product.title,
@@ -113,7 +115,7 @@ function DashboardItem(props) {
                  */
                 setIsDisableButtons(true);
                 setIsDeleting(true);
-                axios.delete(process.env.REACT_APP_BACKEND_STARTING_URL + 'seller/delete-product/' + product.id)
+                axios.delete(Connection.productAddress + 'seller/delete-product/' + product.id)
                     .then(function (response) {
                         console.log(response);
                     })
