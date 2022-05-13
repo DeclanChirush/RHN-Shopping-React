@@ -82,7 +82,8 @@ export default class Register extends Component {
       password: "",
       userType: "",
       successful: false,
-      message: ""
+      message: "",
+      loading: false
     };
   }
 
@@ -123,7 +124,8 @@ export default class Register extends Component {
 
     this.setState({
       message: "",
-      successful: false
+      successful: false,
+      loading: true
     });
 
     // TODO: Validate register form fields
@@ -150,10 +152,15 @@ export default class Register extends Component {
 
           this.setState({
             successful: false,
+            loading: false,
             message: resMessage
           });
         }
       );
+    } else {
+      this.setState({
+        loading: false
+      })
     }
   }
 
@@ -232,18 +239,25 @@ export default class Register extends Component {
                 </div>
 
                 <div className="form-group">
-                  <button className="btn btn-primary btn-block">Sign Up</button>
+                  <button className="btn btn-primary btn-block" disabled={this.state.loading}>
+                    {this.state.loading && (
+                        <span className="spinner-border spinner-border-sm"> </span>
+                    )}
+                    <span>&nbsp; Sign Up</span>
+                  </button>
                 </div>
               </div>
+
+
             )}
             <p className="forgot-password text-right">
-              Already registered <a href="/signin">sign in?</a>
+              Already registered <a href="/sign-in">sign in?</a>
             </p>
 
             {this.state.message && (
               <div className="form-group">
                 <div className={this.state.successful ? "alert alert-success" : "alert alert-danger"} role="alert">
-                  {this.state.message}
+                  <center>{this.state.message}</center>
                 </div>
               </div>
             )}

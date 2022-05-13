@@ -1,12 +1,11 @@
 import axios from "axios";
-
-const API_BACKEND_URL = "http://localhost:8080/api/auth/";
+import Connection from "../services/connection.json"
 
 class UserService {
 
   // TODO: Function for get user credentials and display result of login
   login(username, password) {
-    return axios.post(API_BACKEND_URL + "sign-in", {
+    return axios.post(Connection.userAuthenticationAddress + "sign-in", {
         username,
         password
       })
@@ -20,12 +19,13 @@ class UserService {
   }
 
   // TODO: Function for registering user
-  register(username, contactNo, email, password) {
-    return axios.post(API_BACKEND_URL + "sign-up", {
+  register(username, contactNo, email, password, userType) {
+    return axios.post(Connection.userAuthenticationAddress + "sign-up", {
       username,
       contactNo,
       email,
-      password
+      password,
+      userType
     });
   }
 
