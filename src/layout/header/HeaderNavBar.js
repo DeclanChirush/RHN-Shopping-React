@@ -3,6 +3,7 @@ import {Nav, Navbar} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import DarkModeToggleDiv from "../../components/DarkModeToggleDiv";
 import {CONTACT_NUMBER} from "../../constants/contact";
+import AuthService from "../../services/user.service";
 
 
 /**
@@ -12,7 +13,27 @@ import {CONTACT_NUMBER} from "../../constants/contact";
  */
 class HeaderNavBar extends Component{
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            isHidden: true
+
+        };
+    }
+
+    componentDidMount() {
+        const user = AuthService.getCurrentUser();
+
+        if (user) {
+            this.setState({
+                isHidden: false
+            });
+        }
+    }
+
     render() {
+
+        const {isHidden} = this.state;
 
     return (
 
@@ -33,8 +54,14 @@ class HeaderNavBar extends Component{
                             className="feather-phone-call"/>
                             {CONTACT_NUMBER}</a>
 
-                        <Link className="login px-2 negation" to="/sign-in">Login</Link>
-                        <Link className="login px-2 negation" to="/sign-up">Sign up</Link>
+                        { isHidden &&
+                            <Link className="login px-2 negation" to="/sign-in">Login</Link>
+                        }
+
+                        { isHidden &&
+                            <Link className="login px-2 negation" to="/sign-up">Sign up</Link>
+                        }
+
                         <p className='text-center'>
                             <DarkModeToggleDiv/>
                         </p>
