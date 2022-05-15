@@ -76,7 +76,7 @@ function Checkout() {
          */
         //TODO: ADD customer name, and hard coded data.
         setIsPlaceOrdering(true);
-        axios.post(process.env.REACT_APP_BACKEND_STARTING_URL + 'buyer/place-order',
+        axios.post('http://40.115.90.43:8080' + '/api/product/buyer/place-order',
             {
                 orderDetail: {
                     orderId: orderId,
