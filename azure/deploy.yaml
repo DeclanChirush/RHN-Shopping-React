@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: easy-shopping-frontend-deployment
+  labels:
+    app: easy-shopping-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: easy-shopping-frontend
+  template:
+    metadata:
+      labels:
+        app: easy-shopping-frontend
+    spec:
+      containers:
+        - image: hirush99/easy-shopping-frontend:{{tag}}
+          name: easy-shopping-frontend
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 0.3
+              memory: 400Mi
+            limits:
+              cpu: 0.5
+              memory: 500Mi
