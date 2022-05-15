@@ -33,7 +33,7 @@ class UserService {
   logout() {
     localStorage.removeItem("user");
     //localStorage.removeItem("userType");
-    window.location.reload();
+    window.location.replace("/");
   }
 
   // TODO: Function for get current user

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Col, OverlayTrigger, Popover, Row} from 'react-bootstrap';
 import {Link} from 'react-router-dom'
 import CartPreview from "./CartPreview";
+
 //import {configureStore} from "../../store";
 
 //import {useSelector} from "react-redux";
@@ -11,6 +12,7 @@ import AuthService from "../../services/user.service";
  * Header bottom part.
  * @constructor
  */
+
 class HeaderBanner extends Component{
 
     constructor(props) {
@@ -27,6 +29,8 @@ class HeaderBanner extends Component{
     }
 
     componentDidMount() {
+
+
         const user = AuthService.getCurrentUser();
 
         if (user) {
