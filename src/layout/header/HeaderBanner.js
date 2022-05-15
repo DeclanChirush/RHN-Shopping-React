@@ -20,7 +20,8 @@ class HeaderBanner extends Component{
         this.state = {
             showBuyerBoard: false,
             showSellerBoard: false,
-            currentUser: undefined
+            currentUser: undefined,
+            isHidden: false
 
         };
     }
@@ -32,7 +33,8 @@ class HeaderBanner extends Component{
             this.setState({
                 currentUser: user,
                 showBuyerBoard: user.roles.includes("ROLE_BUYER"),
-                showSellerBoard: user.roles.includes("ROLE_SELLER")
+                showSellerBoard: user.roles.includes("ROLE_SELLER"),
+                isHidden: true
             });
         }
     }
@@ -41,18 +43,9 @@ class HeaderBanner extends Component{
         AuthService.logout();
     }
 
-    // const history = useHistory();
-    //
-    // /**
-    //  * Redirect to checkout page
-    //  */
-    // const onClickCheckout = () => {
-    //     history.push('/checkout')
-    // }
-
     render() {
 
-        const { currentUser, showBuyerBoard, showSellerBoard} = this.state;
+        const { currentUser, showBuyerBoard, showSellerBoard, isHidden} = this.state;
 
     return (
         <React.Fragment>
@@ -94,8 +87,13 @@ class HeaderBanner extends Component{
                     {/* --- Display Current User name dynamically when user log in to the system ---- */}
                     {currentUser && <Link  className="float-right pl-lg-3 font-weight-bolder text-light feather-user " > {currentUser.username}</Link>}
                     <br></br>
+
                     {/* --- Logout from the system---- */}
-                    <Link className="float-right font-weight-bolder pl-lg-3 text-light feather-log-out" to="/" onClick={this.logOut}> SignOut</Link>
+                    { isHidden &&
+                        <Link className="float-right font-weight-bolder pl-lg-3 text-light feather-log-out" to="/" onClick={this.logOut}> SignOut</Link>
+                    }
+
+
 
 
                 </Col>

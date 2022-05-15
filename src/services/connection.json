@@ -1,6 +1,6 @@
 {
   "ipAddress": "localhost",
   "port": "8080",
-  "productAddress": "http://localhost:8080/api/product/",
-  "userAuthenticationAddress" : "http://localhost:8080/api/auth/"
+  "productAddress": "http://13.77.46.50:8080/api/product/",
+  "userAuthenticationAddress" : "http://52.255.56.85:8080/api/auth/"
 }

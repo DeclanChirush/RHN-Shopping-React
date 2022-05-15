@@ -23,7 +23,7 @@ function Footer() {
                 </Col>
                 <Col xs={12} sm={12} className="py-1">
 
-                    Copyright &copy; 2021. All Rights Reserved. Created by a student group of &nbsp;
+                    Copyright &copy; 2022. All Rights Reserved. Created by a student group of &nbsp;
                     <a href="https://www.sliit.lk/" rel="noreferrer" target="_blank">
                         SLIIT
                     </a>
