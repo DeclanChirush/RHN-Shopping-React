@@ -16,11 +16,11 @@ function CreateProduct() {
     const [title, setTitle] = useState(null);
     const [price, setPrice] = useState(null);
     const [sellPrice, setSellPrice] = useState(null);
-    const [imageUrl, setImageUrl] = useState(null);
+    //const [imageUrl, setImageUrl] = useState(null);
     const [categoryType, setCategoryType] = useState(null);
     const [stockQty, setStockQty] = useState(null);
     const [isCreatingProduct, setIsCreatingProduct] = useState(false);
-    const [isUploadingImage, setIsUploadingImage] = useState(false);
+    //const [isUploadingImage, setIsUploadingImage] = useState(false);
     const categories = ["Grocery", "Fruits", "Veggies", "Bakery", "Electronics"];
     const history = useHistory();
     const onHandleBackToDashboard = () => history.push('/dashboard');
@@ -31,7 +31,7 @@ function CreateProduct() {
             event.stopPropagation();
             setValidated(true);
 
-            if (title === null || price === null || sellPrice === null || imageUrl === null || categoryType === null ||
+            if (title === null || price === null || sellPrice === null || categoryType === null ||
                 stockQty === null) {
                 return;
             }
@@ -46,7 +46,7 @@ function CreateProduct() {
                     title: title,
                     sellPrice: sellPrice,
                     price: price,
-                    image: imageUrl + "",
+                    image: "https://firebasestorage.googleapis.com/v0/b/madd-assignment-laptop.appspot.com/o/laptop_images%2Fnitro_gaming.jpg?alt=media&token=34a65ac4-1707-4823-adc8-335bbcc364b1",
                     categoryType: categoryType,
                     stockQty: stockQty
                 })
@@ -62,7 +62,7 @@ function CreateProduct() {
                     setTitle(null);
                     setPrice(null);
                     setSellPrice(null);
-                    setImageUrl(null);
+                    //setImageUrl(null);
                     setCategoryType(null);
                     setStockQty(null);
                     setValidated(false);
@@ -93,13 +93,13 @@ function CreateProduct() {
                         <div className="create-product p-3">
                             <h2 className="pt-5">Create Product</h2>
 
-                            <ImgUpload setImageUrl={setImageUrl} imageUrl={imageUrl}
-                                       setIsImageUploading={setIsUploadingImage}/>
+                            {/*<ImgUpload setImageUrl={setImageUrl} imageUrl={imageUrl}*/}
+                            {/*           setIsImageUploading={setIsUploadingImage}/>*/}
 
-                            {
-                                !imageUrl && validated &&
-                                    <small className="text-danger d-block pb-3">This field can not be empty.</small>
-                            }
+                            {/*{*/}
+                            {/*    !imageUrl && validated &&*/}
+                            {/*        <small className="text-danger d-block pb-3">This field can not be empty.</small>*/}
+                            {/*}*/}
 
                             <Form noValidate validated={validated} onSubmit={handleOnSubmit}>
 
@@ -148,7 +148,7 @@ function CreateProduct() {
                                 </Form.Group>
 
                                 <Button type="submit" className='float-right custom-primary-button my-2'
-                                        disabled={isCreatingProduct || isUploadingImage}>
+                                        disabled={isCreatingProduct}>
                                     Create Now &nbsp;
                                     {
                                         isCreatingProduct &&
