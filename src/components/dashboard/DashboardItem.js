@@ -57,7 +57,7 @@ function DashboardItem(props) {
                         sellPrice: sellPrice,
                         price: price,
                         image: product.image,
-                        cType: product.categoryType,
+                        categoryType: product.categoryType,
                         stockQty: stockQty
                     }
                 ).then(function (response) {
