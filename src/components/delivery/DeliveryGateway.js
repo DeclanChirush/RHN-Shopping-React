@@ -1,7 +1,7 @@
 import React from "react";
 import AddressService from './AddressService';
 import {Button, Col, Form, Card, Table} from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -30,19 +30,21 @@ class DeliveryGateway extends React.Component {
             .catch(function (error) {
                 console.log(error);
             }).then(result => {
-                console.log(result);
-                const orderData = result.data;
-                this.setState({ orderData });
-                this.setOrderData();
-            })
+            console.log(result);
+            const orderData = result.data;
+            this.setState({orderData});
+            this.setOrderData();
+        })
     }
 
     // TODO: Initializing default values
     initialState = {
-        orderData : [],
+        orderData: [],
         orderCost: 0.00,
         deliveryCost: 0.00,
         totalCost: 0.00,
+        pid: '',
+        pStatus: '',
 
         userid: '',
         title: '',
@@ -91,12 +93,16 @@ class DeliveryGateway extends React.Component {
     }
 
     // TODO: Initialing values get from database
-    setOrderData = ()=> {
+    setOrderData = () => {
         this.state.orderData.map(order =>
-        this.setState({
-            userid:  order.orderid,
-            orderCost: order.price
-        }))
+            this.setState({
+                pid: order.id,
+                userid: order.orderid,
+                orderCost: order.price,
+                deliveryCost: order.deliveryprice,
+                totalCost: order.totalprice,
+                pStatus: order.status
+            }))
     }
 
     // TODO: Getting calculated delivery cost
@@ -144,7 +150,7 @@ class DeliveryGateway extends React.Component {
     }
 
     // TODO: Implementation of Pay Button
-    submitAddress = (event) => {
+    submitAddress = async (event) => {
         event.preventDefault();
 
         if (this.state.addresss == null) {
@@ -153,7 +159,7 @@ class DeliveryGateway extends React.Component {
             let newAddress = {
                 userid: this.state.userid,
                 title: this.state.title,
-                addresss: this.state.addresss,
+                location: this.state.addresss,
                 province: this.state.province,
                 district: this.state.district,
                 city: this.state.city,
@@ -161,16 +167,42 @@ class DeliveryGateway extends React.Component {
                 phone: this.state.phone
             }
 
+            let postManData = {
+                id: this.state.pid,
+                orderid: this.state.userid,
+                price: this.state.orderCost,
+                deliveryprice: this.state.deliveryCost,
+                totalprice: this.state.totalCost,
+                status: this.state.pStatus
+            }
+
             // TODO: Save new address in database
-            AddressService.postAddress(newAddress)
+            await AddressService.postAddress(newAddress)
+                .then(response => {
+                    console.log('NEW ADDRESS ADDED TO DATABASE!');
+                    console.log(response.data);
+                    // this.props.history.push('/payment');
+                })
                 .catch(function (error) {
                     console.log(error);
-                }).then(() => {
-                console.log('NEW ADDRESS ADDED TO DATABASE!');
-                console.log('Address => ' + JSON.stringify(newAddress));
-                // this.props.history.push('/payment');
-            });
+                });
+
+            await AddressService.updateLastOrder(postManData)
+                .then(response => {
+                    console.log('LAST ORDER UPDATED!');
+                    console.log(response.data);
+                })
+                .then(() => {
+                    this.submitAlert();
+                })
+                .catch(function (error) {
+                    console.log(error.message);
+                });
         }
+    }
+
+    submitAlert() {
+        alert("Delivery Details Submitted!");
     }
 
     // TODO: Display Website
@@ -179,7 +211,8 @@ class DeliveryGateway extends React.Component {
             <div className={'container'}>
                 <Card>
                     <Card.Body>
-                        <h1 className={'card-header text-center p-3 mb-2 bg-primary text-white'}>RHNA Delivery Service</h1>
+                        <h1 className={'card-header text-center p-3 mb-2 bg-primary text-white'}>RHNA Delivery
+                            Service</h1>
                         <br/>
                         <h4 className={'font-weight-bold'}>Enter a Address</h4>
                         <Form id={'addAddressForm'}
@@ -204,7 +237,7 @@ class DeliveryGateway extends React.Component {
                                                   name={'title'}
                                                   value={this.state.title}
                                                   onChange={this.assignTitleHandler}>
-                                        <option> </option>
+                                        <option></option>
                                         <option>Home</option>
                                         <option>Office</option>
                                         <option>Other</option>
@@ -217,7 +250,7 @@ class DeliveryGateway extends React.Component {
                                                   name={'province'}
                                                   value={this.state.province}
                                                   onChange={this.assignProvinceHandler}>
-                                        <option> </option>
+                                        <option></option>
                                         <option>Central</option>
                                         <option>Eastern</option>
                                         <option>North Central</option>
@@ -236,7 +269,7 @@ class DeliveryGateway extends React.Component {
                                                   name={'district'}
                                                   value={this.state.district}
                                                   onChange={this.assignDistrictHandler}>
-                                        <option> </option>
+                                        <option></option>
                                         <option>Ampara</option>
                                         <option>Anuradhapura</option>
                                         <option>Badulla</option>

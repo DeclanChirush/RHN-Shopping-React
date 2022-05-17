@@ -32,6 +32,11 @@ class AddressService {
     getLastOrder() {
         return axios.get(DELIVERY_API_URL + '/api/postman/last');
     }
+
+    // Update Last Order
+    updateLastOrder(postman) {
+        return axios.put(DELIVERY_API_URL + '/api/postman/update', postman);
+    }
 }
 
 export default new AddressService();
