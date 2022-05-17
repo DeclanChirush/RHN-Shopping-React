@@ -62,7 +62,7 @@ class Payment extends React.Component{
     submitPaymentDetails = (event) => {
         event.preventDefault();
 
-        const URL_PAYMENTGATEWAY = "http://13.70.151.212:8080/paytime/api/makePayment";
+        const URL_PAYMENTGATEWAY = "http://20.190.112.195:8080/paytime/api/makePayment";
 
         const PaymentRequest ={
             cardType:this.state.cardType,
