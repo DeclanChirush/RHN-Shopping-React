@@ -11,6 +11,9 @@ import Footer from './layout/Footer';
 import Login from './components/home/login.component';
 import Register from './components/home/register.component';
 import DeliveryGateway from './components/delivery/DeliveryGateway';
+import PaymentMethodSelector from "./components/payment/PaymentMethodSelector";
+import CardPayment from "./components/payment/card-payment/CardPayment";
+import MobilePayment from "./components/payment/mobile-payment/MobilePayment";
 
 class App extends Component{
     render() {
@@ -33,6 +36,15 @@ class App extends Component{
                         </Route>
                         <Route path='/api/delivery'>
                             <DeliveryGateway/>
+                        </Route>
+                        <Route path='/payment'>
+                            <PaymentMethodSelector/>
+                        </Route>
+                        <Route path='/card-payment'>
+                            <CardPayment/>
+                        </Route>
+                        <Route path='/mobile-payment'>
+                            <MobilePayment/>
                         </Route>
 
                         <Route path='/'>
