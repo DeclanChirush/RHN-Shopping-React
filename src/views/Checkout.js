@@ -58,6 +58,8 @@ function Checkout() {
         let postman = {
             orderid : orderId,
             price: tot,
+            deliveryprice: '0',
+            totalprice: '0',
             status: 'A'
         }
 
