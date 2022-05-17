@@ -37,7 +37,7 @@ class Payment extends React.Component{
         axios.get(URL_GET_AMOUNT)
             .then(response => response.data)
             .then((data) => {
-                this.setState({amount:data.price})
+                this.setState({amount:data[0].price})
             }).catch(error => {
             console.log("Error in retrieving amount. Error")
             console.log(error)
